@@ -8,7 +8,7 @@ const db = {};
 
 const sequelize = new Sequelize ({
 	dialect: "mariadb", 
-	port: 3307,
+	port: process.env.DBPORT,
 	replication: {
 		read: [{
 			"username": process.env.slave_db_username,

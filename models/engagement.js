@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
             Engagement.belongsTo(models.FunType, {
                 foreignKey: 'fun_type_id',
             });
+            Engagement.hasMany(models.FeaturedEngagementItems, {
+                foreignKey: 'engagement_id',
+            });
         } 
     }
     Engagement.init({

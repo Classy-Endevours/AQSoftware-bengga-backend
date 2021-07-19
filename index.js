@@ -8,6 +8,7 @@ const loginRoute = require('./routes/auth');
 const scoreRoute = require('./routes/score');
 const leaderboardRoute = require('./routes/leaderboard');
 const schedulerRoute = require('./routes/scheduler');
+const engagementRoute = require('./routes/engagement');
 const Sentry = require('@sentry/node');
 const Tracing = require("@sentry/tracing");
 const middleware = require('./utils/middleware');
@@ -44,6 +45,7 @@ app.use('/api/v1/player', middleware.hashMiddleware(), leaderboardRoute);
 
 app.use('/api/v1/player', middleware.hashMiddleware(), schedulerRoute);
 
+app.use('/api/v1/player', middleware.hashMiddleware(), engagementRoute);
 
 app.listen(port, () => {
     console.log('Server is up and running on port', port);
