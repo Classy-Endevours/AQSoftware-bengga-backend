@@ -1,32 +1,30 @@
-CREATE TABLE win_engineering_classes
+CREATE TABLE `win_engineering_classes`
 (
-    id smallint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    create_date timestamp NOT NULL,
-    last_modified_date timestamp NOT NULL,
+    `id` smallint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `create_date` timestamp NOT NULL,
+    `last_modified_date` timestamp NOT NULL,
     name varchar(100) NOT NULL,
-    is_deleted boolean NOT NULL DEFAULT false
+    `is_deleted` boolean NOT NULL DEFAULT false
 );
 
------- sample data
--- insert into win_engineering_classes select 1, current_timestamp, current_timestamp, 'A', false;
+insert into win_engineering_classes select 1, current_timestamp, current_timestamp, 'A', false;
 
-CREATE TABLE win_categories
+CREATE TABLE `win_categories`
 (
-    id smallint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    create_date timestamp NOT NULL,
-    last_modified_date timestamp NOT NULL,
+    `id` smallint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `create_date` timestamp NOT NULL,
+    `last_modified_date` timestamp NOT NULL,
     name varchar(100) NOT NULL,
-    is_deleted boolean NOT NULL DEFAULT false
+    `is_deleted` boolean NOT NULL DEFAULT false
 );
 
------- sample data
--- insert into win_categories select 1, current_timestamp, current_timestamp, 'Consolation Prize', false;
--- insert into win_categories select 2, current_timestamp, current_timestamp, 'Minor Prize', false;
--- insert into win_categories select 3, current_timestamp, current_timestamp, 'Major Prize', false;
+insert into win_categories select 1, current_timestamp, current_timestamp, 'Consolation Prize', false;
+insert into win_categories select 2, current_timestamp, current_timestamp, 'Minor Prize', false;
+insert into win_categories select 3, current_timestamp, current_timestamp, 'Major Prize', false;
 
-CREATE TABLE win_engineering_consolidated
+CREATE TABLE `win_engineering_consolidated`
 (
-    id smallint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id` smallint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
     last_modified_date timestamp NOT NULL,
     win_engineering_class_id smallint unsigned NOT NULL,
     amount int unsigned NOT NULL,
@@ -45,7 +43,7 @@ ON win_engineering_consolidated(win_engineering_class_id);
 
 CREATE TABLE win_engineering_hof
 (
-    id smallint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id` smallint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
     last_modified_date timestamp NOT NULL,
     win_engineering_class_id smallint unsigned NOT NULL,
     win_order int unsigned NOT NULL,

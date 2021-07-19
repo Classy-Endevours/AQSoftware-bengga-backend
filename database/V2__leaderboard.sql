@@ -24,11 +24,10 @@ CREATE TABLE fun_types
     ON UPDATE RESTRICT
 );
 
----------------- sample data --------------------------
--- INSERT INTO fun_types SELECT 1, UUID_TO_BIN('68fa9d00-6022-11e9-9974-000d88f48163', true), NOW(), NOW(), 'Police and thief', 'Police and thief', 2, 'https://s3.amazonaws.com/famers/720/F591829835540SXJZX.jpg', 'https://s3.amazonaws.com/famers/720/F591829835540SXJZX.jpg', false, 2, 'https://bengga-web-funtypes-sg.s3-ap-southeast-1.amazonaws.com/live/police-and-thief/index.html', 'https://bengga-web-funtypes-sg.s3-accelerate.amazonaws.com/live/police-and-thief/package.zip', '86dce4e1d9269fbaf6721425cf0f143ffd3dd510', false, false, 0, 1;
--- insert into fun_types
--- SELECT NULL, UUID_TO_BIN('03e64220-3b38-11e9-aa97-0242ac110003', true),'2019-02-28 09:05:38.114','2020-08-27 13:11:26.453','Stickman pong', 'Stickman pong', 2, 'https://s3.amazonaws.com/famers/720/F59182983338PJ2HAG.jpg', 'https://s3.amazonaws.com/famers/720/F59182983338PJ2HAG.jpg', false, 2, 'https://s3.amazonaws.com/bengga-web-funtypes/production/stickman-pong/index.html', 'https://bengga-web-funtypes-sg.s3-ap-southeast-1.amazonaws.com/live/stickman-pong/package.zip', 'a931a98cd14bfd610065de4ec326d6f10e329058', FALSE,FALSE, 0, 1 UNION
--- SELECT NULL, UUID_TO_BIN('b1f44e50-3c02-11e9-b849-0242ac110003', true),'2019-03-01 09:16:28.469','2020-09-18 06:26:10.776','Biggest gum', 'Biggest gum', 2, 'https://s3.amazonaws.com/famers/720/F59182983332JYCDUQ.jpg', 'https://s3.amazonaws.com/famers/720/F59182983332JYCDUQ.jpg', false, 2, 'https://bengga-web-funtypes-sg.s3-ap-southeast-1.amazonaws.com/live/biggest-gum/index.html', 'https://bengga-web-funtypes-sg.s3-accelerate.amazonaws.com/live/biggest-gum/package.zip', 'eb272c5844f643bc8a36b8c88052b34c6cecead3', FALSE,FALSE, 0, 1
+INSERT INTO fun_types SELECT 1, UUID_TO_BIN('68fa9d00-6022-11e9-9974-000d88f48163', true), NOW(), NOW(), 'Police and thief', 'Police and thief', 2, 'https://s3.amazonaws.com/famers/720/F591829835540SXJZX.jpg', 'https://s3.amazonaws.com/famers/720/F591829835540SXJZX.jpg', false, 2, 'https://bengga-web-funtypes-sg.s3-ap-southeast-1.amazonaws.com/live/police-and-thief/index.html', 'https://bengga-web-funtypes-sg.s3-accelerate.amazonaws.com/live/police-and-thief/package.zip', '86dce4e1d9269fbaf6721425cf0f143ffd3dd510', false, false, 0, 1;
+insert into fun_types
+SELECT NULL, UUID_TO_BIN('03e64220-3b38-11e9-aa97-0242ac110003', true),'2019-02-28 09:05:38.114','2020-08-27 13:11:26.453','Stickman pong', 'Stickman pong', 2, 'https://s3.amazonaws.com/famers/720/F59182983338PJ2HAG.jpg', 'https://s3.amazonaws.com/famers/720/F59182983338PJ2HAG.jpg', false, 2, 'https://s3.amazonaws.com/bengga-web-funtypes/production/stickman-pong/index.html', 'https://bengga-web-funtypes-sg.s3-ap-southeast-1.amazonaws.com/live/stickman-pong/package.zip', 'a931a98cd14bfd610065de4ec326d6f10e329058', FALSE,FALSE, 0, 1 UNION
+SELECT NULL, UUID_TO_BIN('b1f44e50-3c02-11e9-b849-0242ac110003', true),'2019-03-01 09:16:28.469','2020-09-18 06:26:10.776','Biggest gum', 'Biggest gum', 2, 'https://s3.amazonaws.com/famers/720/F59182983332JYCDUQ.jpg', 'https://s3.amazonaws.com/famers/720/F59182983332JYCDUQ.jpg', false, 2, 'https://bengga-web-funtypes-sg.s3-ap-southeast-1.amazonaws.com/live/biggest-gum/index.html', 'https://bengga-web-funtypes-sg.s3-accelerate.amazonaws.com/live/biggest-gum/package.zip', 'eb272c5844f643bc8a36b8c88052b34c6cecead3', FALSE,FALSE, 0, 1
 
 CREATE TABLE engagements
 (
@@ -57,11 +56,10 @@ CREATE TABLE engagements
     ON UPDATE RESTRICT
 );
 
--------------- sample data
--- insert into engagements SELECT 1, UUID_TO_BIN('9b50a330-bf89-11eb-a72e-7073cbc050eb', true), NOW(), NOW(), 'Hot pursuit', "https://s3.amazonaws.com/famers/720/F1299507890549BVPIJX.jpg", "https://s3.amazonaws.com/famers/160/F1299507890549BVPIJX.jpg", "https://s3.amazonaws.com/famers/mp4/F1299507890550XTD35B.mp4", false, 2, 1, '2021-05-01', '2021-06-30', null, null;
--- insert into engagements
--- SELECT null, UUID_TO_BIN('2895bfd0-6826-11ea-a192-7073cbc050eb', true), '2020-03-17 08:10:25.753','2020-03-17 08:10:25.753','Stickman pong','https://s3.amazonaws.com/famers/720/F696773208223HTMFZA.jpg','https://s3.amazonaws.com/famers/160/F696773208223HTMFZA.jpg','https://s3.amazonaws.com/famers/mp4/F696773208224K3GCQF.mp4', false, 2, 2, '2021-05-01', '2021-06-30',null, 'https://s3.amazonaws.com/famers/720/F836642498398P2RKY3.jpg' UNION 
--- SELECT null, UUID_TO_BIN('9bb8bbc0-73ed-11ea-84c5-7073cbc050eb', true), '2020-04-01 07:52:52.81','2020-04-21 04:51:06.49','Biggest gum','https://s3.amazonaws.com/famers/720/F358571481297L5MZV3.jpg','https://s3.amazonaws.com/famers/160/F358571481297L5MZV3.jpg','https://s3.amazonaws.com/famers/mp4/F358571481298UEDVK4.mp4', false, 2, 3, '2021-05-01', '2021-06-30', null, 'https://s3.amazonaws.com/famers/720/F72825394811CGSKHI.jpg' 
+insert into engagements SELECT 1, UUID_TO_BIN('9b50a330-bf89-11eb-a72e-7073cbc050eb', true), NOW(), NOW(), 'Hot pursuit', "https://s3.amazonaws.com/famers/720/F1299507890549BVPIJX.jpg", "https://s3.amazonaws.com/famers/160/F1299507890549BVPIJX.jpg", "https://s3.amazonaws.com/famers/mp4/F1299507890550XTD35B.mp4", false, 2, 1, '2021-05-01', '2021-06-30', null, null;
+insert into engagements
+SELECT null, UUID_TO_BIN('2895bfd0-6826-11ea-a192-7073cbc050eb', true), '2020-03-17 08:10:25.753','2020-03-17 08:10:25.753','Stickman pong','https://s3.amazonaws.com/famers/720/F696773208223HTMFZA.jpg','https://s3.amazonaws.com/famers/160/F696773208223HTMFZA.jpg','https://s3.amazonaws.com/famers/mp4/F696773208224K3GCQF.mp4', false, 2, 2, '2021-05-01', '2021-06-30',null, 'https://s3.amazonaws.com/famers/720/F836642498398P2RKY3.jpg' UNION 
+SELECT null, UUID_TO_BIN('9bb8bbc0-73ed-11ea-84c5-7073cbc050eb', true), '2020-04-01 07:52:52.81','2020-04-21 04:51:06.49','Biggest gum','https://s3.amazonaws.com/famers/720/F358571481297L5MZV3.jpg','https://s3.amazonaws.com/famers/160/F358571481297L5MZV3.jpg','https://s3.amazonaws.com/famers/mp4/F358571481298UEDVK4.mp4', false, 2, 3, '2021-05-01', '2021-06-30', null, 'https://s3.amazonaws.com/famers/720/F72825394811CGSKHI.jpg' 
 
 CREATE TABLE leaderboard_details
 (

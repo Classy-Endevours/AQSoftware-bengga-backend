@@ -4,7 +4,16 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev" : "nodemon index",
+		"migration:create": "sequelize migration:generate",
+		"migration:up": "sequelize db:migrate",
+		"migration:down": "sequelize db:migrate:undo",
+		"migration:down:all": "sequelize db:migrate:undo:all",
+		"seeder:create": "sequelize seed:generate --name",
+		"seeder:up": "sequelize db:seed:all",
+		"seeder:down": "sequelize db:seed:undo",
+		"seeder:down:all": "sequelize db:seed:undo:all",
+		"migration:reset": "npm run migration:down:all && npm run migration:up && npm run seeder:up"
 	},
 	"keywords": [],
 	"author": "",
