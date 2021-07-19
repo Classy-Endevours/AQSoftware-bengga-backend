@@ -7,6 +7,17 @@ exports.validateLogin = (data) => {
     })
     return LoginSchema.validate(data)
 };
+exports.validateRegistration = (data) => {
+    const LoginSchema = Joi.object({
+        display_name: Joi.string().required(),
+        avatar_big: Joi.string().required(),
+        avatar_small: Joi.string().required(),
+        firstname: Joi.string().required(),
+        lastname: Joi.string().required(),
+        referred_by_id: Joi.string().optional(),
+    })
+    return LoginSchema.validate(data)
+};
 
 exports.validateScore = (data)=>{
     const ScoreSchema = Joi.array().items(Joi.object({

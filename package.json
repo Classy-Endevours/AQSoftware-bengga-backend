@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev" : "nodemon index",
+		"dev": "nodemon index",
 		"migration:create": "sequelize migration:generate",
 		"migration:up": "sequelize db:migrate",
 		"migration:down": "sequelize db:migrate:undo",
@@ -32,6 +32,8 @@
 		"passport": "^0.4.1",
 		"passport-jwt": "^4.0.0",
 		"request": "^2.88.2",
-		"sequelize": "^6.6.2"
+		"sequelize": "^6.6.2",
+		"short-uuid": "^4.2.0",
+		"uuid": "^3.4.0"
 	}
 }

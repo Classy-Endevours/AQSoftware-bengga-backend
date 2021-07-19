@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         display_name: DataTypes.STRING,
         avatar_big: DataTypes.STRING(1000),
         avatar_small: DataTypes.STRING(1000),
+        display_name: DataTypes.STRING(1000),
+        lastname: DataTypes.STRING(1000),
+        firstname: DataTypes.STRING(1000),
+        referred_by_id: DataTypes.STRING(1000),
         user_type: DataTypes.INTEGER
     }, {
         // Other model options go here
