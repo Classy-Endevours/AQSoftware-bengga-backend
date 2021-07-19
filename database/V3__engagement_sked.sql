@@ -9,10 +9,10 @@ CREATE TABLE fun_type_families
 );
 
 insert into fun_type_families
-SELECT null, UUID_TO_BIN('0fab0482-e393-11e6-bf01-fe55135034f3', true), NOW(), NOW(), 'Famer', false UNION ALL
+(SELECT null, UUID_TO_BIN('0fab0482-e393-11e6-bf01-fe55135034f3', true), NOW(), NOW(), 'Famer', false UNION ALL
 SELECT null, UUID_TO_BIN('0fab0acc-e393-11e6-bf01-fe55135034f3', true), NOW(), NOW(), 'Jackpot', false UNION ALL
 SELECT null, UUID_TO_BIN('0fab0572-e393-11e6-bf01-fe55135034f3', true), NOW(), NOW(), 'Battle', false UNION ALL
-SELECT null, UUID_TO_BIN('0fab0b94-e393-11e6-bf01-fe55135034f3', true), NOW(), NOW(), 'Tourney', false;
+SELECT null, UUID_TO_BIN('0fab0b94-e393-11e6-bf01-fe55135034f3', true), NOW(), NOW(), 'Tourney', false)
 
 CREATE TABLE featured_engagement_items
 (
