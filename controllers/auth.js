@@ -100,3 +100,42 @@ exports.createUser = async (req, res) => {
         return res.status(500).send({ message: "Internal Server Error!" });
     }
 };
+
+exports.updateUser = async(req, res) => {
+    try {
+        const { error } = validator.validateUpdateProfile(req.body);
+        if (error) {
+            return res.status(400).json({
+                success: false,
+                errors: {
+                    message: error.details[0].message,
+                },
+            });
+        }
+        const {
+            firstname,
+            lastname,
+            display_name,
+            avatar_big,
+            avatar_small,
+            id,
+        } = req.body;
+
+        const user = await User.findByPk(id);
+        if(user) {
+            await user.update({
+                firstname,
+                lastname,
+                display_name,
+                avatar_big,
+                avatar_small
+              });
+        } else {
+            throw new Error('User does not exist')
+        }
+        return res.status(200).send({ message: "Update successful!" });
+    } catch (error) {
+        console.error({ error });
+        return res.status(500).send({ message: error.message || "Internal Server Error!" });
+    }
+}
