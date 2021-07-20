@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     class FunTypeFamily extends Model {
         static associate(models) {
             // define association here
+            FunTypeFamily.hasMany(models.FeaturedEngagementItems, {
+                foreignKey: 'fun_type_family_id',
+            });
           } 
     }
     FunTypeFamily.init({

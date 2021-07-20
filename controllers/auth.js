@@ -101,7 +101,7 @@ exports.createUser = async (req, res) => {
     }
 };
 
-exports.updateUser = async(req, res) => {
+exports.updateUser = async (req, res) => {
     try {
         const { error } = validator.validateUpdateProfile(req.body);
         if (error) {
@@ -122,20 +122,40 @@ exports.updateUser = async(req, res) => {
         } = req.body;
 
         const user = await User.findByPk(id);
-        if(user) {
+        if (user) {
             await user.update({
                 firstname,
                 lastname,
                 display_name,
                 avatar_big,
-                avatar_small
-              });
+                avatar_small,
+            });
         } else {
-            throw new Error('User does not exist')
+            throw new Error("User does not exist");
         }
         return res.status(200).send({ message: "Update successful!" });
     } catch (error) {
         console.error({ error });
-        return res.status(500).send({ message: error.message || "Internal Server Error!" });
+        return res
+            .status(500)
+            .send({ message: error.message || "Internal Server Error!" });
     }
-}
+};
+
+exports.getUserData = async (req, res) => {
+    try {
+        const result = await User.findAll({});
+        if (result.length > 0) {
+            return res.status(200).send({ success: true, data: result });
+        } else {
+            return res
+                .status(200)
+                .send({ success: true, message: "No Record Found" });
+        }
+    } catch (error) {
+        console.log({ error });
+        return res
+            .status(500)
+            .send({ success: false, error: "Internal Server Error!" });
+    }
+};
