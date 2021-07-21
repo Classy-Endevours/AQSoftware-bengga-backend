@@ -10,6 +10,7 @@ exports.validateLogin = (data) => {
 exports.validateRegistration = (data) => {
     const LoginSchema = Joi.object({
         display_name: Joi.string().required(),
+        phone_number: Joi.string().required(),
         avatar_big: Joi.string().required(),
         avatar_small: Joi.string().required(),
         firstname: Joi.string().required(),

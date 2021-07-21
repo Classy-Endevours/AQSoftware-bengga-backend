@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const moment = require('moment');
 const { v4: uuidv4 } = require("uuid");
 const short_uuid = require("short-uuid");
 const models = require("../models/index.js");
@@ -6,7 +7,7 @@ const Sequelize = require("sequelize");
 const User = models.User;
 
 const validator = require("../validations/validator");
-const { sendOTP } = require("../utils/message.js");
+const { sendOTP, generateOTP } = require("../utils/message.js");
 
 exports.login = async (req, res) => {
     const { error } = validator.validateLogin(req.body);
@@ -62,7 +63,15 @@ exports.createUser = async (req, res) => {
             avatar_big,
             avatar_small,
             referred_by_id,
+            phone_number,
         } = req.body;
+
+        const checker = await User.findOne({
+            where: {
+                phone_number,
+            }
+          })
+        if(checker) throw new Error('User already exist!')
 
         const old_id = uuidv4();
         const api_key = short_uuid.generate();
@@ -70,6 +79,7 @@ exports.createUser = async (req, res) => {
         const newOldId = await models.sequelize.query(
             `select uuid_to_bin("${old_id}", true) as oid`
         );
+        const { code, expire } = generateOTP()
         const user = await User.create({
             firstname,
             lastname,
@@ -79,9 +89,13 @@ exports.createUser = async (req, res) => {
             referred_by_id,
             old_id: newOldId[0][0]?.oid,
             api_key,
+            phone_number,
             user_type,
             create_date: new Date(),
             last_modified_date: new Date(),
+            verification_code: code,
+            verification_expire: expire,
+            is_verified: false,
         });
         const token = jwt.sign(
             {
@@ -98,7 +112,7 @@ exports.createUser = async (req, res) => {
         return res.status(200).send({ message: "Register successful!" });
     } catch (error) {
         console.error({ error });
-        return res.status(500).send({ message: "Internal Server Error!" });
+        return res.status(500).send({ message: error.message || "Internal Server Error!" });
     }
 };
 
@@ -163,14 +177,67 @@ exports.getUserData = async (req, res) => {
 
 exports.sendOTP = async (req, res) => {
     try {
-        const { mobile } = req.body;
-        const otpData = sendOTP('Something', mobile)
-        return res
-                .status(200)
-                .send({ success: true, data: otpData, message: "OTP sent" });
+        const { phone_number } = req.body;
+        const user = await User.findOne({
+            where: {
+                phone_number,
+                is_verified: false,
+            }
+          })
+        if(!user) throw new Error('User does not exist!')
+        const { code, expire } = generateOTP();
+        await user.update({
+            verification_code: code,
+            verification_expire: expire,
+        });
+        return res.status(200).send({ message: "OTP sent successful!" });
     } catch (error) {
+        console.error({ error })
         return res
                 .status(500)
-                .send({ success: true, message: "No Record Found" });
+                .send({ success: true, message: error.message || "No Record Found" });
+    }
+}
+
+exports.verifyOTP = async (req, res) => {
+    try {
+        const { phone_number, code } = req.body;
+        const user = await User.findOne({
+            where: {
+                phone_number,
+                verification_code: code,
+                is_verified: false,
+            }
+          })
+        if(!user) throw new Error('OTP not valid!')
+
+        const expireDate = moment(user.verification_expire);
+        const date = moment(new Date());
+        
+        if(expireDate.isBefore(date)) throw new Error('OTP Expired!')
+
+        await user.update({
+            is_verified: true,
+        });
+
+        const token = jwt.sign(
+            {
+                id: user.id,
+                oldId: user.old_id,
+            },
+            process.env.jwt_token_signing_key,
+            {
+                expiresIn: process.env.jwt_access_token_expiration_time,
+                issuer: process.env.jwt_token_issuer,
+            }
+        );
+        res.header("Authorization", `Bearer ${token}`);
+
+        return res.status(200).send({ message: "OTP verified successful!" });
+    } catch (error) {
+        console.error({ error })
+        return res
+                .status(500)
+                .send({ message: error.message || "No Record Found" });
     }
 }
