@@ -7,7 +7,7 @@ const Sequelize = require("sequelize");
 const User = models.User;
 
 const validator = require("../validations/validator");
-const { sendOTP, generateOTP } = require("../utils/message.js");
+const { sendOTP:sendOTPMethod, generateOTP } = require("../utils/message.js");
 
 exports.login = async (req, res) => {
     const { error } = validator.validateLogin(req.body);
@@ -22,7 +22,7 @@ exports.login = async (req, res) => {
     } else {
         const data = await User.findOne({
             where: Sequelize.literal(
-                `api_key = "${req.body.apiKey}" and old_id = UUID_TO_BIN("${req.body.oldId}",true)`
+                `api_key = "${req.body.apiKey}" and old_id = UUID_TO_BIN("${req.body.oldId}",true) and is_verified = 1`
             ),
             attributes: ["old_id", "id"],
         });
@@ -80,6 +80,7 @@ exports.createUser = async (req, res) => {
             `select uuid_to_bin("${old_id}", true) as oid`
         );
         const { code, expire } = generateOTP()
+        const response = sendOTPMethod(`Your Verification code is ${code}`, phone_number)
         const user = await User.create({
             firstname,
             lastname,
@@ -109,7 +110,7 @@ exports.createUser = async (req, res) => {
             }
         );
         res.header("Authorization", `Bearer ${token}`);
-        return res.status(200).send({ message: "Register successful!" });
+        return res.status(200).send({ message: "OTP sent successfully" });
     } catch (error) {
         console.error({ error });
         return res.status(500).send({ message: error.message || "Internal Server Error!" });
@@ -186,11 +187,12 @@ exports.sendOTP = async (req, res) => {
           })
         if(!user) throw new Error('User does not exist!')
         const { code, expire } = generateOTP();
+        const response = sendOTPMethod(`Your Verification code is ${code}`, phone_number)
         await user.update({
             verification_code: code,
             verification_expire: expire,
         });
-        return res.status(200).send({ message: "OTP sent successful!" });
+        return res.status(200).send({ message: "OTP sent successfully!" });
     } catch (error) {
         console.error({ error })
         return res

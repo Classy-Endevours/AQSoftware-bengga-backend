@@ -16,6 +16,11 @@ router.get(
     passport.authenticate("jwt", { session: false }),
     engagementController.getBanner
 );
+router.post(
+    "/createBanner",
+    passport.authenticate("jwt", { session: false }),
+    engagementController.createBanner
+);
 
 // Export Router
 module.exports = router;

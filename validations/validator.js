@@ -53,3 +53,24 @@ exports.validateId = (data)=>{
     })
     return IdSchema.validate(data)
 }
+
+exports.validateCreateBanner = (data) => {
+    const CreateBannerSchema = Joi.object({
+        engagement_id: Joi.number().required(),
+        fun_type_family_id: Joi.number().required(),
+        sort_order: Joi.number().required(),
+        publish_time: Joi.string().required(),
+        is_special: Joi.boolean().required(),
+        preloader_image_big: Joi.string().required(),
+        postloader_image_big: Joi.string().required(),
+        target_score: Joi.number().required(),
+        top_players: Joi.number().required(),
+        join_fee: Joi.number().required(),
+        join_ticket: Joi.number().required(),
+        join_hour: Joi.number().required(),
+        join_fee_type: Joi.number().required(),
+        pot_money: Joi.number().required(),
+        tourney_winners_url: Joi.string().required(),
+    });
+    return CreateBannerSchema.validate(data);
+};

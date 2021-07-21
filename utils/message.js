@@ -1,17 +1,16 @@
-const moment = require('moment');
+const moment = require("moment");
 const client = require("twilio")(
     process.env.TWILIO_ACCOUNT_SID,
-    process.env.TWILIO_AUTH_TOKEN,
-    { accountSid: "AC" }
+    process.env.TWILIO_AUTH_TOKEN
 );
 
 exports.sendOTP = (body, to) =>
     new Promise(async (resolve, reject) => {
         try {
             const response = await client.messages.create({
-                body: "HI",
+                body,
                 from: process.env.TWILIO_FROM,
-                to: "+918652507623",
+                to,
             });
             resolve(response);
         } catch (error) {
@@ -22,5 +21,5 @@ exports.sendOTP = (body, to) =>
 
 exports.generateOTP = () => ({
     code: Math.floor(100000 + Math.random() * 900000),
-    expire:  moment(new Date()).add(6, 'm').toDate(),
+    expire: moment(new Date()).add(6, "m").toDate(),
 });
