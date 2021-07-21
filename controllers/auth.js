@@ -235,7 +235,7 @@ exports.verifyOTP = async (req, res) => {
         );
         res.header("Authorization", `Bearer ${token}`);
 
-        return res.status(200).send({ message: "OTP verified successful!" });
+        return res.status(200).send({ data:user, message: "OTP verified successful!" });
     } catch (error) {
         console.error({ error })
         return res
