@@ -9,12 +9,12 @@ exports.validateLogin = (data) => {
 };
 exports.validateRegistration = (data) => {
     const LoginSchema = Joi.object({
-        display_name: Joi.string().required(),
+        display_name: Joi.string().optional(),
         phone_number: Joi.string().required(),
-        avatar_big: Joi.string().required(),
-        avatar_small: Joi.string().required(),
-        firstname: Joi.string().required(),
-        lastname: Joi.string().required(),
+        avatar_big: Joi.string().optional(),
+        avatar_small: Joi.string().optional(),
+        firstname: Joi.string().optional(),
+        lastname: Joi.string().optional(),
         referred_by_id: Joi.string().optional(),
     })
     return LoginSchema.validate(data)
