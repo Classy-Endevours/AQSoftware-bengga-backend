@@ -6,6 +6,7 @@ const Sequelize = require("sequelize");
 const User = models.User;
 
 const validator = require("../validations/validator");
+const { sendOTP } = require("../utils/message.js");
 
 exports.login = async (req, res) => {
     const { error } = validator.validateLogin(req.body);
@@ -159,3 +160,17 @@ exports.getUserData = async (req, res) => {
             .send({ success: false, error: "Internal Server Error!" });
     }
 };
+
+exports.sendOTP = async (req, res) => {
+    try {
+        const { mobile } = req.body;
+        const otpData = sendOTP('Something', mobile)
+        return res
+                .status(200)
+                .send({ success: true, data: otpData, message: "OTP sent" });
+    } catch (error) {
+        return res
+                .status(500)
+                .send({ success: true, message: "No Record Found" });
+    }
+}

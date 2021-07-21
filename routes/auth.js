@@ -9,6 +9,7 @@ router.post("/login", authController.login);
 router.post("/registerUser", authController.createUser);
 router.post("/updateUser", authController.updateUser);
 router.get("/getUserData", authController.getUserData);
+router.post("/otp", authController.sendOTP);
 
 
 // Export Router
