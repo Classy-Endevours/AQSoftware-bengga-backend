@@ -80,7 +80,7 @@ exports.createUser = async (req, res) => {
             `select uuid_to_bin("${old_id}", true) as oid`
         );
         const { code, expire } = generateOTP()
-        const response = sendOTPMethod(`Your Verification code is ${code}`, phone_number)
+        const response = await sendOTPMethod(`Your Verification code is ${code}`, phone_number)
         const user = await User.create({
             firstname,
             lastname,
@@ -187,7 +187,7 @@ exports.sendOTP = async (req, res) => {
           })
         if(!user) throw new Error('User does not exist!')
         const { code, expire } = generateOTP();
-        const response = sendOTPMethod(`Your Verification code is ${code}`, phone_number)
+        const response = await sendOTPMethod(`Your Verification code is ${code}`, phone_number)
         await user.update({
             verification_code: code,
             verification_expire: expire,
