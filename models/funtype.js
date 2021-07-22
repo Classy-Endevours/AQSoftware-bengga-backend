@@ -13,6 +13,21 @@ module.exports = (sequelize, DataTypes) => {
         description: {
             type: DataTypes.STRING(1000),
         },
+        owner_id : {
+            type: DataTypes.INTEGER,
+        },
+        image_big: {
+            type: DataTypes.STRING(1000),
+        },
+        image_small: {
+            type: DataTypes.STRING(1000),
+        },
+        is_deleted: {
+            type:DataTypes.BOOLEAN,
+        },
+        type : {
+            type: DataTypes.INTEGER
+        },
         web_url: {
             type: DataTypes.STRING(1000),
         },
@@ -25,38 +40,11 @@ module.exports = (sequelize, DataTypes) => {
         is_landscape: {
             type: DataTypes.INTEGER,
         },
-        with_sound: {
+        mode: {
             type: DataTypes.INTEGER,
-        },
-        image_big: {
-            type: DataTypes.STRING(1000),
-        },
-        image_small: {
-            type: DataTypes.STRING(1000),
         },
         numplayers: {
             type: DataTypes.INTEGER,
-        },
-        type: {
-            type: DataTypes.INTEGER,
-        },
-        join_fee: {
-            type: DataTypes.INTEGER,
-        },
-        join_ticket: {
-            type: DataTypes.INTEGER,
-        },
-        join_hour: {
-            type: DataTypes.INTEGER,
-        },
-        join_fee_type: {
-            type: DataTypes.INTEGER,
-        },
-        pot_money: {
-            type: DataTypes.INTEGER,
-        },
-        tourney_winners_url: {
-            type: DataTypes.STRING(1000),
         },
         create_date: {
             type: DataTypes.DATE,

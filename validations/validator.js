@@ -74,3 +74,18 @@ exports.validateCreateBanner = (data) => {
     });
     return CreateBannerSchema.validate(data);
 };
+
+exports.validateCreateTournaments = (data) => {
+    const CreateTournamentsSchema = Joi.object({
+        fun_type_id: Joi.number().required(),
+        title: Joi.string().required(),
+        image_big: Joi.string().required(),
+        image_small: Joi.string().required(),
+        video: Joi.string().required(),
+        source_id: Joi.number().required(),
+        tips_image_big: Joi.string().required(),
+        join_start_date: Joi.string().required(),
+        join_end_date: Joi.string().required(),
+    });
+    return CreateTournamentsSchema.validate(data);
+};

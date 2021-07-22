@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         title: {
             type: DataTypes.STRING,
         },
+        fun_type_id: {
+            type: DataTypes.INTEGER,
+        },
         image_big: {
             type: DataTypes.STRING(1000),        
         },
@@ -34,7 +37,13 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(1000),
         },
         is_deleted: {
+            type: DataTypes.BOOLEAN,
+        },
+        source_id: {
             type: DataTypes.INTEGER,
+        },
+        tips_image_big: {
+            type: DataTypes.STRING(1000),
         },
         join_start_date: {
             type: DataTypes.DATE,
