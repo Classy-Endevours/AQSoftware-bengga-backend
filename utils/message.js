@@ -4,14 +4,15 @@ const client = require("twilio")(
     process.env.TWILIO_AUTH_TOKEN
 );
 
-exports.sendOTP = (body, to) =>
+exports.sendOTP = (bodyMessage, numberToBeSent) =>
     new Promise(async (resolve, reject) => {
         try {
             const response = await client.messages.create({
-                body,
-                from: process.env.TWILIO_FROM,
-                to,
+                body: bodyMessage,
+                messagingServiceSid: process.env.TWILIO_MESSAGE_SERVICE_ID,
+                to: numberToBeSent
             });
+            
             resolve(response);
         } catch (error) {
             reject(error);
